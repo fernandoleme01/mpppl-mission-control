@@ -1,9 +1,11 @@
+# === MPPPL — NUNCA comitar estes arquivos ===
+
 # Python
 __pycache__/
 *.pyc
 *.pyo
 venv/
-.env
+.venv/
 *.egg-info/
 
 # Node
@@ -11,12 +13,33 @@ node_modules/
 dist/
 .DS_Store
 
-# Logs
+# Environment (contém tokens, caminhos locais, chaves)
+.env
+.env.*
+!.env.example
+
+# Logs (contêm dados operacionais)
 logs/
 *.log
 
-# Local config
+# Config local
 *.local
+
+# Dados sensíveis / clientes
+**/processos.db
+**/faiss/**
+**/idx_processos/**
+data/**
+
+# Dados do usuário
+~/.hermes/**
+.hermes/**
+
+# Chaves SSH / GPG
+*.pem
+*.key
+*.cer
+*.p12
 
 # Test artifacts
 .pytest_cache/

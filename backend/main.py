@@ -1,7 +1,7 @@
 """
-Mission Control Dashboard — FastAPI Backend
-Real-time backend for local AI mesh monitoring.
-Port: 8000
+MPPPL Mission Control Dashboard — FastAPI Backend
+Painel em tempo real para o ecossistema de agentes jurídicos MPPPL.
+Porta: 8000
 """
 import asyncio
 import collections
@@ -14,28 +14,30 @@ from typing import Any
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import SESSIONS_DB, POLL_INTERVAL, MAX_WS_CONNECTIONS
+from .config import SESSIONS_DB, POLL_INTERVAL, MAX_WS_CONNECTIONS, PROCESSOS_DB_PATH, FAISS_IDX_PATH
 from . import state as _st
-from .state import _state, _insights, _now_iso, broadcast_status
-from .background import run_poll_loop, run_openviking_watchdog, run_generate_brief_on_startup
-from .helpers import _refresh_agent_messages, _seconds_until
+from .state import _state, _now_iso, broadcast_status
+from .background import (
+    run_poll_loop,
+    run_processos_poll,
+    run_faiss_health_check,
+    run_lightrag_health_check,
+)
 
 # Routers
 from .routers import (
-    agents, memory, hermes, system, cron,
-    routing, sessions, insights, permissions, rag, chat,
+    agents, hermes, system, cron, memory, routing,
 )
 
 # ---------------------------------------------------------------------------
-# History ring buffer (AC4) — 1 snapshot/min, 24h max
+# History ring buffer — 1 snapshot/min, 24h max
 # ---------------------------------------------------------------------------
 
-_HISTORY_MAX = 1440  # 1 per minute × 60 min × 24 h
+_HISTORY_MAX = 1440
 _history: collections.deque = collections.deque(maxlen=_HISTORY_MAX)
 
 
 async def _snapshot_loop() -> None:
-    """Appends a state snapshot every 60s for the timeline scrubber."""
     while True:
         await asyncio.sleep(60)
         if _state.get("last_updated"):
@@ -43,9 +45,9 @@ async def _snapshot_loop() -> None:
                 "ts": _now_iso(),
                 "services": dict(_state["services"]),
                 "agents": list(_state["agents"]),
-                "routing_summary": dict(_state["routing_summary"]),
+                "subagentes": list(_state["subagentes"]),
+                "processos": list(_state["processos"]),
                 "system": dict(_state["system"]),
-                "signal_watcher": dict(_state["signal_watcher"]),
             })
 
 
@@ -53,36 +55,22 @@ async def _snapshot_loop() -> None:
 # App setup
 # ---------------------------------------------------------------------------
 
-def _init_sessions_db() -> None:
-    with sqlite3.connect(SESSIONS_DB) as conn:
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS session_log (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT NOT NULL,
-                ts TEXT NOT NULL,
-                role TEXT NOT NULL,
-                content TEXT NOT NULL
-            )
-        """)
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_date ON session_log(date)")
-
-
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
-    _init_sessions_db()
-    _refresh_agent_messages()
+    # Inicializa background tasks
     asyncio.create_task(run_poll_loop())
-    asyncio.create_task(run_openviking_watchdog())
-    asyncio.create_task(run_generate_brief_on_startup())
+    asyncio.create_task(run_processos_poll())
+    asyncio.create_task(run_faiss_health_check())
+    asyncio.create_task(run_lightrag_health_check())
     asyncio.create_task(_snapshot_loop())
-    print(f"[startup] Mission Control backend on :8000 — polling every {POLL_INTERVAL}s", flush=True)
+    print(f"[startup] MPPPL Mission Control on :8000 — polling every {POLL_INTERVAL}s", flush=True)
     yield
 
 
 app = FastAPI(
-    title="Mission Control Dashboard API",
-    description="Real-time backend for local AI mesh monitoring",
-    version="2.0.0",
+    title="MPPPL Mission Control API",
+    description="Painel em tempo real para o ecossistema de agentes jurídicos MPPPL",
+    version="1.0.0",
     lifespan=_lifespan,
 )
 
@@ -98,15 +86,17 @@ app.add_middleware(
 # Register routers
 # ---------------------------------------------------------------------------
 
-for router_module in (agents, memory, hermes, system, cron, routing, sessions, insights, permissions, rag, chat):
+for router_module in (agents, hermes, system, cron, memory, routing):
     app.include_router(router_module.router)
 
 # ---------------------------------------------------------------------------
-# Core endpoints that live in main (aggregate state or WebSocket)
+# Core endpoints
 # ---------------------------------------------------------------------------
+
 
 @app.get("/api/status")
 async def api_status():
+    """Estado completo do dashboard MPPPL."""
     jobs = []
     for j in _state["cron_jobs"]:
         job = dict(j)
@@ -117,12 +107,13 @@ async def api_status():
         "last_updated": _state["last_updated"],
         "services": _state["services"],
         "agents": _state["agents"],
+        "subagentes": _state["subagentes"],
+        "processos": _state["processos"],
         "cron_jobs": jobs,
         "routing_summary": _state["routing_summary"],
-        "permission_audit_summary": _state["permission_audit_summary"],
-        "memories": _state["memories"],
-        "llm_models": _state["llm_models"],
-        "llm_active": _state["llm_active"],
+        "system": _state["system"],
+        "modulos": _state["modulos"],
+        "escritorio_stats": _state["escritorio_stats"],
     }
 
 
@@ -150,6 +141,7 @@ async def api_history(t: str | None = None):
 # WebSocket
 # ---------------------------------------------------------------------------
 
+
 @app.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket):
     async with _st._ws_lock:
@@ -165,15 +157,20 @@ async def websocket_endpoint(ws: WebSocket):
         "timestamp": _now_iso(),
         "services": _state["services"],
         "agents": _state["agents"],
+        "subagentes": _state["subagentes"],
+        "processos": _state["processos"],
         "cron_jobs": _state["cron_jobs"],
         "memories": _state["memories"],
         "memory_summary": _state["memory_summary"],
         "memory_events": _state["memory_events"],
         "llm_active": _state["llm_active"],
-        "voice_active": _state["voice_active"],
-        "trending_repos": _state["trending_repos"],
-        "insights": _st._insights,
-        "agent_messages": _state["agent_messages"],
+        "system": _state["system"],
+        "modulos": _state["modulos"],
+        "escritorio_stats": _state["escritorio_stats"],
+        "cto_insights": _state["cto_insights"],
+        "faiss_status": _state["faiss_status"],
+        "lightrag_status": _state["lightrag_status"],
+        "log_buffer": _state["log_buffer"],
     }
     try:
         await ws.send_text(json.dumps(payload))
@@ -197,3 +194,15 @@ async def websocket_endpoint(ws: WebSocket):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)
+
+
+def _seconds_until(iso_str: str | None) -> int | None:
+    """Helper — seconds until an ISO datetime string."""
+    if not iso_str:
+        return None
+    try:
+        target = datetime.fromisoformat(iso_str.replace("Z", "+00:00"))
+        delta = (target - datetime.now(timezone.utc)).total_seconds()
+        return max(0, int(delta))
+    except (ValueError, TypeError):
+        return None
