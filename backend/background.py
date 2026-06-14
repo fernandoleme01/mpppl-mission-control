@@ -43,6 +43,13 @@ def _ler_processos_db() -> list[dict]:
             return []
         conn = sqlite3.connect(str(db))
         conn.row_factory = sqlite3.Row
+        # Check if table exists
+        cursor = conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='processos'"
+        )
+        if not cursor.fetchone():
+            conn.close()
+            return []
         cursor = conn.execute(
             "SELECT * FROM processos ORDER BY updated_at DESC LIMIT 50"
         )
@@ -136,9 +143,15 @@ def _coletar_metricas_sistema() -> dict:
 def _atualizar_status_subagentes(hermes_status: dict) -> list[dict]:
     """Atualiza status dos subagentes MPPPL baseado no estado do Hermes."""
     subagentes = list(_state.get("subagentes", []))
+    # Verifica se o Hermes está rodando
+    is_online = (
+        hermes_status.get("status") == "up"
+        or hermes_status.get("gateway_state") == "running"
+        or hermes_status.get("pid") is not None
+    )
     for sa in subagentes:
-        sa["status"] = "online" if hermes_status.get("status") == "up" else "offline"
-        sa["last_active"] = hermes_status.get("last_updated", _now_iso())
+        sa["status"] = "online" if is_online else "offline"
+        sa["last_active"] = hermes_status.get("updated_at", _now_iso())
         sa["task"] = hermes_status.get("current_task") or None
     return subagentes
 

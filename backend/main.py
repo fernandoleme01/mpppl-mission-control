@@ -99,9 +99,10 @@ async def api_status():
     """Estado completo do dashboard MPPPL."""
     jobs = []
     for j in _state["cron_jobs"]:
-        job = dict(j)
-        job["next_run_in_seconds"] = _seconds_until(job.get("next_run_at"))
-        jobs.append(job)
+        if isinstance(j, dict):
+            job = dict(j)
+            job["next_run_in_seconds"] = _seconds_until(job.get("next_run_at"))
+            jobs.append(job)
     return {
         "timestamp": _now_iso(),
         "last_updated": _state["last_updated"],
