@@ -1,0 +1,98 @@
+{
+  "casos_processos": [
+    {
+      "numero_processo": "PROC-001-2026",
+      "cliente_nome": "Roberto Ferreira",
+      "area_atuacao": "Bancária",
+      "valor_causa": 30000,
+      "advocado_responsavel": "Ana Paula",
+      "status": "Em Andamento",
+      "data_abertura": "2026-09-02",
+      "data_proxima_acao": "2026-10-10",
+      "proxima_acao_descricao": "Apresentar proposta de renegociação ao banco",
+      "juizo_vara": "1ª Vara Cível",
+      "documentos_recebidos": [
+        "Documento de identidade",
+        "Comprovante de residência",
+        "Extratos bancários",
+        "Contrato de dívida original"
+      ],
+      "notas": "Caso com bom potencial. Banco aberto a negociação. CPF 123.456.789-00",
+      "progresso_percentual": 35
+    },
+    {
+      "numero_processo": "PROC-002-2026",
+      "cliente_nome": "Maria Santos",
+      "area_atuacao": "Previdenciária",
+      "valor_causa": 50000,
+      "advocado_responsavel": "Pedro Santos",
+      "status": "Documentação Incompleta",
+      "data_abertura": "2026-09-15",
+      "data_proxima_acao": "2026-10-05",
+      "proxima_acao_descricao": "Coletar exames médicos faltantes",
+      "juizo_vara": "TRF - 3ª Região",
+      "documentos_recebidos": [
+        "Documento de identidade",
+        "Carteira de trabalho",
+        "Comprovante de contribuições INSS"
+      ],
+      "notas": "Aposentadoria por invalidez. Precisa de laudo médico mais recente (máx. 2 anos).",
+      "progresso_percentual": 20
+    },
+    {
+      "numero_processo": "PROC-003-2026",
+      "cliente_nome": "Ana Costa",
+      "area_atuacao": "Trabalhista",
+      "valor_causa": 45000,
+      "advocado_responsavel": "Carlos Mendes",
+      "status": "Consultoria Agendada",
+      "data_abertura": "2026-09-20",
+      "data_proxima_acao": "2026-10-15",
+      "proxima_acao_descricao": "Primeira consulta jurídica - análise de documentação",
+      "juizo_vara": "18ª Vara do Trabalho",
+      "documentos_recebidos": [
+        "Documento de identidade",
+        "Comprovante de residência",
+        "Emails de assédio moral",
+        "Relatório de testemunhas"
+      ],
+      "notas": "Caso de assédio moral. Empresa possui histórico de reclamações. Cliente muito motivada.",
+      "progresso_percentual": 15
+    },
+    {
+      "numero_processo": "PROC-004-2026",
+      "cliente_nome": "João Silva",
+      "area_atuacao": "Trabalhista",
+      "valor_causa": 25000,
+      "advocado_responsavel": "Carlos Mendes",
+      "status": "Análise Inicial",
+      "data_abertura": "2026-10-02",
+      "data_proxima_acao": "2026-10-09",
+      "proxima_acao_descricao": "Entrar em contato para coletar documentação",
+      "juizo_vara": "TJ - Pendente",
+      "documentos_recebidos": [],
+      "notas": "Demissão sem justa causa. Sem documentação ainda. Primeiro contato hoje.",
+      "progresso_percentual": 5
+    },
+    {
+      "numero_processo": "PROC-005-2026",
+      "cliente_nome": "Daniela Alves",
+      "area_atuacao": "Bancária",
+      "valor_causa": 60000,
+      "advocado_responsavel": "Ana Paula",
+      "status": "Aguardando Decisão",
+      "data_abertura": "2026-07-10",
+      "data_proxima_acao": "2026-10-15",
+      "proxima_acao_descricao": "Aguardando sentença do juiz",
+      "juizo_vara": "3ª Vara Cível",
+      "documentos_recebidos": [
+        "Documento de identidade",
+        "Comprovante de residência",
+        "Extratos de múltiplas contas",
+        "Contrato de empréstimo original"
+      ],
+      "notas": "Caso de sucesso potencial. Juiz demonstrou simpatia com argumentação. Decisão esperada até 15/10.",
+      "progresso_percentual": 75
+    }
+  ]
+}

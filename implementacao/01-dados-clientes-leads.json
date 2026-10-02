@@ -1,0 +1,100 @@
+{
+  "clientes_leads": [
+    {
+      "nome": "João Silva",
+      "whatsapp": "11999998888",
+      "email": "joao.silva@email.com",
+      "area_interesse": "Trabalhista",
+      "campanha_origem": "Meta Ads",
+      "status": "Novo",
+      "data_primeiro_contato": "2026-10-02",
+      "valor_estimado": 15000,
+      "notas": "Demitido sem justa causa. Interessado em processo trabalhista.",
+      "telefone_secundario": "1133334444"
+    },
+    {
+      "nome": "Maria Santos",
+      "whatsapp": "11988887777",
+      "email": "maria.santos@email.com",
+      "area_interesse": "Previdenciária",
+      "campanha_origem": "Google Ads",
+      "status": "Contato Inicial",
+      "data_primeiro_contato": "2026-09-28",
+      "valor_estimado": 20000,
+      "notas": "INSS negado. Aposentadoria por invalidez. Candidata forte.",
+      "telefone_secundario": ""
+    },
+    {
+      "nome": "Carlos Oliveira",
+      "whatsapp": "11977776666",
+      "email": "carlos.oliveira@email.com",
+      "area_interesse": "Bancária",
+      "campanha_origem": "TikTok Ads",
+      "status": "Qualificado",
+      "data_primeiro_contato": "2026-09-25",
+      "valor_estimado": 25000,
+      "notas": "Dívida com juros abusivos. Quer renegociar com banco. Bem qualificado.",
+      "telefone_secundario": "1144445555"
+    },
+    {
+      "nome": "Ana Costa",
+      "whatsapp": "11966665555",
+      "email": "ana.costa@email.com",
+      "area_interesse": "Trabalhista",
+      "campanha_origem": "Indicação",
+      "status": "Em Negociação",
+      "data_primeiro_contato": "2026-09-15",
+      "valor_estimado": 18000,
+      "notas": "Assédio moral no trabalho. Consultoria agendada para 15/10.",
+      "telefone_secundario": ""
+    },
+    {
+      "nome": "Roberto Ferreira",
+      "whatsapp": "11955554444",
+      "email": "roberto.ferreira@email.com",
+      "area_interesse": "Bancária",
+      "campanha_origem": "Meta Ads",
+      "status": "Cliente",
+      "data_primeiro_contato": "2026-08-20",
+      "valor_estimado": 30000,
+      "notas": "Contrato assinado em 02/09. Negociação com banco iniciada.",
+      "telefone_secundario": "1155556666"
+    },
+    {
+      "nome": "Fernanda Lima",
+      "whatsapp": "11944443333",
+      "email": "fernanda.lima@email.com",
+      "area_interesse": "Previdenciária",
+      "campanha_origem": "Google Ads",
+      "status": "Novo",
+      "data_primeiro_contato": "2026-10-01",
+      "valor_estimado": 22000,
+      "notas": "Pensão por morte negada. Viúva com 2 filhos. Caso sensível.",
+      "telefone_secundario": ""
+    },
+    {
+      "nome": "Paulo Mendes",
+      "whatsapp": "11933332222",
+      "email": "paulo.mendes@email.com",
+      "area_interesse": "Trabalhista",
+      "campanha_origem": "TikTok Ads",
+      "status": "Não Qualificado",
+      "data_primeiro_contato": "2026-09-30",
+      "valor_estimado": 0,
+      "notas": "Ação prescrita (5 anos). Reanálise em 30 dias conforme orientado.",
+      "telefone_secundario": ""
+    },
+    {
+      "nome": "Daniela Alves",
+      "whatsapp": "11922221111",
+      "email": "daniela.alves@email.com",
+      "area_interesse": "Bancária",
+      "campanha_origem": "Indicação",
+      "status": "Contato Inicial",
+      "data_primeiro_contato": "2026-09-26",
+      "valor_estimado": 28000,
+      "notas": "Refinanciamento de múltiplas dívidas. Follow-up agendado.",
+      "telefone_secundario": "1166667777"
+    }
+  ]
+}
