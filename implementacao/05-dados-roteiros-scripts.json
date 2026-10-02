@@ -1,0 +1,108 @@
+{
+  "roteiros_scripts": [
+    {
+      "titulo": "Script WhatsApp - Trabalhista (Abordagem)",
+      "area_atuacao": "Trabalhista",
+      "tipo_script": "Abordagem Inicial",
+      "conteudo": "Oi {nome}! 👋 Vi seu interesse em direitos trabalhistas.\n\nVocê passou por demissão sem justa causa, assédio ou outro problema no trabalho?\n\nTenho excelentes notícias: você pode recuperar seus direitos e ainda receber indenização.\n\nPodemos conversar em chamada rápida? ☎️",
+      "objetivo": "Qualificar lead e agendar consulta",
+      "taxa_conversao_esperada": 0.40,
+      "duracao_media_min": 3,
+      "proximas_perguntas": [
+        "Qual é sua situação exatamente?",
+        "Há quanto tempo trabalha nessa empresa?",
+        "Já procurou ajuda jurídica antes?"
+      ],
+      "objecoes_comuns": [
+        {
+          "objecao": "Tenho medo de represália",
+          "resposta": "Você tem direito legal à proteção. Ações com base em represália são ainda mais graves e aumentam sua indenização."
+        },
+        {
+          "objecao": "Quanto custa?",
+          "resposta": "Zero de entrada. Você paga 20-30% APENAS se ganharmos e você receber. Se perdermos, é grátis."
+        },
+        {
+          "objecao": "Preciso pensar...",
+          "resposta": "Entendo. Mas saiba que tem prazos legais. Demanda tem prazo de 2 anos. Podemos conversar em 2 dias?"
+        }
+      ],
+      "proxima_etapa": "Agendar consulta com Carlos Mendes",
+      "notas": "Não ser agressivo. Ser amigo do cliente. Focar em direitos, não em venda.",
+      "data_criacao": "2026-10-01"
+    },
+    {
+      "titulo": "Script WhatsApp - Previdenciária (Abordagem)",
+      "area_atuacao": "Previdenciária",
+      "tipo_script": "Abordagem Inicial",
+      "conteudo": "Oi {nome}! 👋 Vi que seu INSS foi negado.\n\nTenho uma excelente notícia: na maioria dos casos, conseguimos reverter essa negação na Justiça.\n\nJá vi muitas pessoas recuperar MESES de benefício + correção monetária.\n\nPodemos conversar? Sem compromisso. ☎️",
+      "objetivo": "Qualificar lead e agendar consulta",
+      "taxa_conversao_esperada": 0.60,
+      "duracao_media_min": 5,
+      "proximas_perguntas": [
+        "Qual benefício foi negado?",
+        "Faz quanto tempo?",
+        "Você já tentou recorrer sozinho?"
+      ],
+      "objecoes_comuns": [
+        {
+          "objecao": "Já tentei isso antes",
+          "resposta": "Entendo a frustração. Mas cada caso é único. Posso revisar sua documentação e ver se tem algum argumento que não foi usado."
+        },
+        {
+          "objecao": "Tenho medo de não conseguir",
+          "resposta": "Medo é normal. Por isso fazemos análise GRÁTIS antes. Se não vir chance, a gente fala honest para você."
+        },
+        {
+          "objecao": "Quanto cobra?",
+          "resposta": "Se ganharmos, 20-25% do valor recuperado. Se perdermos, zero. Você só paga se ficar com dinheiro."
+        }
+      ],
+      "proxima_etapa": "Agendar consulta com Pedro Santos",
+      "notas": "Previdenciária tem alto potencial. Clientes muito gratos quando conseguem. Muita sensibilidade.",
+      "data_criacao": "2026-10-01"
+    },
+    {
+      "titulo": "Script WhatsApp - Bancária (Abordagem)",
+      "area_atuacao": "Bancária",
+      "tipo_script": "Abordagem Inicial",
+      "conteudo": "Oi {nome}! 👋 Vi que você está com dívida de juros abusivos.\n\nTenho ótimas notícias:\n• Juros acima do legal? Conseguimos devolver\n• Débito indevido? Posso cancelar\n• Pode reduzir sua dívida em 40-60%\n\nQuer conversar? ☎️",
+      "objetivo": "Qualificar lead e agendar consulta",
+      "taxa_conversao_esperada": 0.45,
+      "duracao_media_min": 4,
+      "proximas_perguntas": [
+        "Qual é o valor da dívida?",
+        "Há quanto tempo está vencida?",
+        "Você tenta renegociar com o banco já?"
+      ],
+      "objecoes_comuns": [
+        {
+          "objecao": "O banco não vai aceitar",
+          "resposta": "Muitas vezes o banco aceita negociação antes de perder em juízo. A gente tem experiência em pressionar para isso."
+        },
+        {
+          "objecao": "Tenho medo de perder bens",
+          "resposta": "Se tem imóvel/carro, a gente age rápido. Mas geralmente conseguimos acordo ANTES disso."
+        },
+        {
+          "objecao": "Não tenho grana para pagar advogado",
+          "resposta": "Exatamente! Por isso não cobro adiantado. Você paga DEPOIS de conseguir redução."
+        }
+      ],
+      "proxima_etapa": "Agendar consulta com Ana Paula",
+      "notas": "Bancária: muitos lêem errado os contratos. Educação é chave. Alto ticket médio.",
+      "data_criacao": "2026-10-01"
+    },
+    {
+      "titulo": "Email Template - Primeiro Contato",
+      "area_atuacao": "Geral",
+      "tipo_script": "Email Automático",
+      "conteudo": "Assunto: ⚖️ Sua Análise Gratuita Está Pronta\n\nOi {nome},\n\nObrigado por entrar em contato conosco!\n\nRecebemos sua demanda e vamos analisar seu caso com atenção.\n\n📋 Próximos passos:\n1. Você receberá uma ligação nossa em até 24h\n2. Faremos uma análise GRATUITA\n3. Se houver chance de ganho, propomos um contrato\n\n🎯 Enquanto isso:\n• Junte toda documentação relacionada\n• Tire prints de conversas importantes\n• Prepare uma lista de testemunhas (se houver)\n\n❓ Dúvidas? Responda este email.\n\nAbraços,\nEquipe Ferreira Paes Leme",
+      "objetivo": "Confirmar recebimento e instruir lead",
+      "duracao_media_min": 2,
+      "quando_enviar": "Imediatamente após lead ser criado",
+      "notas": "Automático via Zapier",
+      "data_criacao": "2026-10-01"
+    }
+  ]
+}
